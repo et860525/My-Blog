@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Blog{% endblock%}
+
+{% block content %}
+
+<div>
+	<div class="container-fluid">
+		<section class="blog-lists">
+			<!-- loop blog -->
+			<div class="blog-content">
+				{% for post in posts %}
+				<article class="post">
+					<div class="post-content">
+						<div class="content-header">
+							<p class="post-date">{{ post.date|date:"Y-m-d" }}</p>						
+							<h2><a href="{{ post.get_absolute_url }}">{{ post.headline|title }}</a></h2>
+						</div>
+						<div class="content-body">
+							<p class="post-summary">{{ post.summary }}</p>
+							<a href="{{ post.get_absolute_url }}"
+								style="float: right; color: #268bd2;">Read
+								More...</a>
+						</div>
+					</div>
+				</article>
+				{% endfor %}
+			</div>
+		</section>
+	</div>
+</div>
+
+{% endblock %}

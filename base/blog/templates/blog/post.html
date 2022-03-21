@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %} 
+
+{% load blog_extras %}
+
+{% block title %}Post{% endblock%} 
+
+{% block content %}
+
+<div>
+	<div class="container-fluid">
+		<div class="blog-content">
+			<article class="post">
+				<div class="post-content">
+					<div class="content-header">
+						<p class="post-date">{{ post.date|date:"Y-m-d" }}</p>		
+						<h2>{{ post.headline|title }}</h2>
+					</div>
+					<div class="content-body">
+						<p>{{ post.body|convert_markdown|safe }}</p>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
