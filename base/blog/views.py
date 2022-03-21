@@ -10,6 +10,12 @@ def home_page(request):
 
 	return render(request, 'blog/index.html', {'posts': posts})
 
+def about_page(request):
+	return render(request, 'blog/about.html', {})
+
+def contact_page(request):
+	return render(request, 'blog/contact.html', {})
+
 def post_page(request, slug):
 	post = Post.objects.get(slug=slug)
 

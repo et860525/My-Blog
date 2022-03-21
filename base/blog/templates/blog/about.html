@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %} 
+{% load static %} 
+{% block title %}About me{% endblock%} 
+
+{% block content %}
+
+<div>
+	<div class="container">
+		<div class="blog">
+			<div class="page">
+				<div class="page-content">
+					<!-- <h1>About me</h1> -->
+					<img class="img-fluid mx-auto d-block" src="{% static 'blog/assets/img/me.png' %}" alt="me.png">
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel nihil, vero sint tenetur ducimus fuga, incidunt magni quis quae fugiat sit neque libero maxime, reiciendis saepe distinctio provident repellat id?
+					</p>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
