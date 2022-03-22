@@ -5,6 +5,7 @@
 *  2.0 - Navbar
 *  3.0 - Body
 *  4.0 - Dashboard
+*  5.0 - Footer
 */
 
 /* 
@@ -19,15 +20,27 @@ body {
 }
 
 :root {
-  --list-hover-color: #ff6700;
+  --hover-color: #999db4;
 }
 
 /* 
 *  2.0 - Navbar
 */
 
+.social-media {
+  margin: 1rem 0;
+}
+
+.social-media a {
+  color: white;
+}
+
+.social-media a:hover {
+  color: var(--hover-color);
+}
+
 #homeNav {
-  padding: 3rem 4rem;
+  padding: 0rem 4rem;
 }
 
 #homeNav .navbar-brand {
@@ -49,12 +62,12 @@ body {
 }
 
 #homeNav .nav-link:hover {
-  color: var(--list-hover-color);
+  color: var(--hover-color);
 }
 
 @media (max-width: 540px) {
   #homeNav {
-    padding: 3rem 2rem;
+    padding: 0rem 2rem;
   }
 }
 
@@ -93,7 +106,7 @@ body {
 }
 
 .content-header a:hover {
-  text-decoration: underline;
+  color: var(--hover-color);
 }
 
 .post-date {
@@ -143,45 +156,16 @@ body {
   text-align: right;
 }
 
-/*** 4.0 - Footer ***/
-#footer-dark {
-  padding: 50px 0;
-  font-family: "Courier New", Courier, monospace;
+/* 
+*  5.0 - Footer
+*/
+
+.footer-content {
+  max-width: 950px;
+  margin: 5em auto 1em;
+  padding: 0 6rem;
 }
 
-#footer-dark ul {
-  padding: 0;
-  list-style: none;
-  line-height: 1.6;
-  font-size: 14px;
-  margin-bottom: 0;
-}
-
-#footer-dark ul a {
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
-}
-
-#footer-dark ul a:hover {
-  opacity: 1;
-}
-
-#footer-dark p,
-#footer-dark .socia-icons {
-  opacity: 0.8;
-}
-
-#footer-dark .copyright {
-  text-align: center;
-  padding-top: 24px;
-  opacity: 0.3;
-  font-size: 13px;
-  margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  #footer-dark .widget {
-    padding-bottom: 20px;
-  }
+.footer-copyright {
+  font-size: .6875em;
 }

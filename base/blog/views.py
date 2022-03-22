@@ -6,7 +6,7 @@ from .forms import CreatePost, UpdatePost
 
 # Create your views here.
 def home_page(request):
-	posts = Post.objects.all()
+	posts = Post.objects.all().order_by('-date')
 
 	return render(request, 'blog/index.html', {'posts': posts})
 
