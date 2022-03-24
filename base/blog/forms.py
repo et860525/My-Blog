@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Category
 
 class CreatePost(forms.Form):
 	headline = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'form-control mb-3'}))
@@ -15,5 +15,12 @@ class UpdatePost(forms.ModelForm):
 			'headline': forms.TextInput(attrs={'class': 'form-control mb-3'}),
 			'summary': forms.TextInput(attrs={'class': 'form-control mb-3'}),
 			'body': forms.Textarea(attrs={'class': 'form-control mb-3'}),
-			'slug': forms.TextInput(attrs={'class': 'form-control mb-3'})
+			'slug': forms.TextInput(attrs={'class': 'form-control mb-3'}),
 		}
+
+class CategoriesForm(forms.Form):
+	categories = forms.ModelMultipleChoiceField(
+		queryset = Category.objects.all(),
+		required = False,
+		widget = forms.CheckboxSelectMultiple,
+	)

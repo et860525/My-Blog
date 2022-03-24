@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %} 
+{% load static %} 
+{% block title %}Category{% endblock%} 
+
+{% block content %}
+
+<div>
+	<div class="container">
+		{% for category in categories %}
+			{{ category.name }}
+			{% for post in category.posts.all %}
+			<div>
+				{{post.headline}}
+			</div>
+			{% endfor %}
+			<hr>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}
