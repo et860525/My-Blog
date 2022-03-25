@@ -7,8 +7,9 @@ from .forms import CreatePost, UpdatePost, CategoriesForm
 # Create your views here.
 def home_page(request):
 	posts = Post.objects.all().order_by('-date')
+	categories = Category.objects.all()
 
-	return render(request, 'blog/index.html', {'posts': posts})
+	return render(request, 'blog/index.html', {'posts': posts, 'categories': categories})
 
 def about_page(request):
 	return render(request, 'blog/about.html', {})

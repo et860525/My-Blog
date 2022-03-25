@@ -109,13 +109,24 @@ body {
   color: var(--hover-color);
 }
 
+
 .post-date {
   color: #d8433e;
 }
 
 .post-summary {
-  margin-top: 1rem;
+  margin-top: .5rem;
   color: #ffffff;
+}
+
+.post-categories a {
+  color: white;
+  text-decoration: none;
+  font-size: .886rem;
+}
+
+.post-categories a:hover {
+  color: var(--hover-color);
 }
 
 @media (max-width: 540px) {
@@ -124,7 +135,6 @@ body {
     padding: 0 2rem;
   }
 
-  .content-body,
   .page-content {
     font-size: 0.9rem;
   }
@@ -168,4 +178,5 @@ body {
 
 .footer-copyright {
   font-size: .6875em;
+  color: var(--hover-color);
 }

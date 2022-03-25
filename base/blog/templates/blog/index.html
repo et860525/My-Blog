@@ -18,6 +18,15 @@
 						</div>
 						<div class="content-body">
 							<p class="post-summary">{{ post.summary }}</p>
+							<div class="post-categories">
+								{% for category in categories %}
+									{% for p in category.posts.all %}
+										{% if post.headline == p.headline %}
+											<a href="">#{{ category }}</a>
+										{% endif %}
+									{% endfor %}									
+								{% endfor %}
+							</div>
 							<a href="{{ post.get_absolute_url }}"
 								style="float: right; color: #268bd2;">Read
 								More...</a>
