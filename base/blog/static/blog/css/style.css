@@ -129,6 +129,38 @@ body {
   color: var(--hover-color);
 }
 
+.post-readmore {
+  color: #268bd2;
+  float: right;
+}
+
+.post-readmore:hover {
+  color: white;
+}
+
+.blog .pagination {
+  margin-top: 4rem;
+}
+
+.blog .pagination .current {
+  font-size: 1.1rem;
+}
+
+.blog .pagination .page-link {
+  background-color: #25262c !important;
+  color: white !important; 
+}
+
+.blog .pagination .page-item.active .page-link {
+  border-color: #d8433e !important; 
+  background-color: #d8433e !important;
+}
+
+.blog .pagination .page-item.disabled .page-link {
+  border-color: var(--hover-color) !important;
+  color: var(--hover-color) !important;
+}
+
 @media (max-width: 540px) {
   .post,
   .page {

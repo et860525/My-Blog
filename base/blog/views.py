@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
@@ -9,7 +10,13 @@ def home_page(request):
 	posts = Post.objects.all().order_by('-date')
 	categories = Category.objects.all()
 
-	return render(request, 'blog/index.html', {'posts': posts, 'categories': categories})
+	paginator = Paginator(posts, 6)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+
+	context = {'posts': page_obj, 'categories': categories}
+
+	return render(request, 'blog/index.html', context)
 
 def about_page(request):
 	return render(request, 'blog/about.html', {})
