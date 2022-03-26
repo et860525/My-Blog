@@ -8,13 +8,12 @@ from .forms import CreatePost, UpdatePost, CategoriesForm
 # Create your views here.
 def home_page(request):
 	posts = Post.objects.all().order_by('-date')
-	categories = Category.objects.all()
 
 	paginator = Paginator(posts, 6)
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
 
-	context = {'posts': page_obj, 'categories': categories}
+	context = {'posts': page_obj}
 
 	return render(request, 'blog/index.html', context)
 

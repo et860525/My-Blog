@@ -19,12 +19,8 @@
 						<div class="content-body">
 							<p class="post-summary">{{ post.summary }}</p>
 							<div class="post-categories">
-								{% for category in categories %}
-									{% for p in category.posts.all %}
-										{% if post.headline == p.headline %}
-											<a href="">#{{ category }}</a>
-										{% endif %}
-									{% endfor %}									
+								{% for category in post.category_set.all %}
+									<a href="">#{{ category.name }}</a>
 								{% endfor %}
 							</div>
 							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>
