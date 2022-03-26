@@ -30,8 +30,49 @@ def post_page(request, slug):
 
 def categories_page(request):
 	categories = Category.objects.all()
+	posts = Post.objects.all().order_by('-date')
+
+	categories_form = CategoriesForm()
+
+	paginator = Paginator(posts, 6)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+
+	if request.method == 'POST':
+		form = CategoriesForm(request.POST)
+		if form.is_valid():
+			# Get categories checkbox 'ckecked' / 獲取打勾的 checkbox
+			categories = form.cleaned_data['categories']
+			# Make every categories to convert string / 把 categories裡的元素轉化成 string
+			categories = [category.name for category in categories]
+
+			# Check categories list is exists or not / 確認 categories list是否存在
+			if categories:
+				filtered_post = []
+				if len(categories) == 1:
+					# Retrun posts of one categories / 只有一個 category就直接回傳
+					filtered_post = Post.objects.filter(category__name=categories[0]).order_by('-date')
+				else:
+					# Get(pop) first category to filter post / 先獲得第一個 element所 filter的 posts
+					first_category = categories.pop(0)
+					first_filter_posts = Post.objects.filter(category__name=first_category)
+
+					# Loop every categories do filter / 將剩下的 categories一個一個做 filter
+					for category in categories:
+						ps = first_filter_posts.filter(category__name=category).order_by('-date')
+						filtered_post = []
+						filtered_post = ps
+						first_filter_posts = ps
+
+				paginator = Paginator(filtered_post, 6)
+				page_number = request.GET.get('page')
+				page_obj = paginator.get_page(page_number)
+			else:
+				redirect('blog:categories_page')
+
+	context = {'categories': categories, 'categories_form': categories_form, 'posts': page_obj}
 	
-	return render(request, 'blog/categories.html', {'categories': categories})
+	return render(request, 'blog/categories.html', context)
 
 @login_required
 def dashboard(request):

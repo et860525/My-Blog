@@ -6,15 +6,55 @@
 
 <div>
 	<div class="container">
-		{% for category in categories %}
-			{{ category.name }}
-			{% for post in category.posts.all %}
-			<div>
-				{{post.headline}}
+		<div class="blog">
+			<div class="category-filter">
+				<form method="post">
+					{% csrf_token %}
+					{{ categories_form.categories }}
+					<button type="submit">Submit</button>
+				</form>
 			</div>
+			{% for post in posts %}
+				<article class="post">
+					<div class="post-content">
+						<div class="content-header">
+							<p class="post-date">{{ post.date|date:"Y-m-d" }}</p>						
+							<h2><a href="{{ post.get_absolute_url }}">{{ post.headline|title }}</a></h2>
+						</div>
+						<div class="content-body">
+							<p class="post-summary">{{ post.summary }}</p>
+							<div class="post-categories">
+								{% for category in post.category_set.all %}
+									<a href="">{{ category }}</a>
+								{% endfor %}
+							</div>
+							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>
+						</div>
+					</div>
+				</article>
 			{% endfor %}
-			<hr>
-		{% endfor %}
+			{% if posts.has_other_pages %}
+				<ul class="pagination page justify-content-center">
+					{% if posts.has_previous %}
+						<li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+						{% else %}
+						<li class="page-item disabled"><a class="page-link">Previous</a></li>
+					{% endif %}
+					{% for i in posts.paginator.page_range %}
+						{% if posts.number == i %}
+							<li class="page-item active"><a class="page-link">{{ i }} <span class="sr-only">(current)</span></a></li>
+						{% else %}
+							<li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if posts.has_next %}
+						<li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+						{% else %}
+						<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+					{% endif %}
+				</ul>
+			{% endif %}
+		</div>
 	</div>
 </div>
 
