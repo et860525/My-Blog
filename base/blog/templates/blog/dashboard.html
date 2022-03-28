@@ -21,6 +21,11 @@
 					<div class="col-12 col-md-7">
 						<a href="{{ post.get_absolute_url }}" style="display: inline-block;"><h5>{{ post }}</h5></a>
 						<p>{{post.summary}}</p>
+						<div class="post-categories">
+							{% for category in post.category_set.all|dictsort:"name" %}
+								<a href="">#{{ category.name }}</a>
+							{% endfor %}
+						</div>
 					</div>
 					<div class="col-12 col-md-5 align-self-center">
 						<div class="control-btns">

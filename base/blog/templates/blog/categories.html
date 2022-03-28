@@ -10,8 +10,11 @@
 			<div class="category-filter">
 				<form method="post">
 					{% csrf_token %}
+					<h5>{{ categories_form.categories.label }}:</h5>
 					{{ categories_form.categories }}
-					<button type="submit">Submit</button>
+					<div class="text-center">
+						<button class="btn btn-primary px-3" type="submit">Submit</button>
+					</div>
 				</form>
 			</div>
 			{% for post in posts %}
@@ -24,8 +27,8 @@
 						<div class="content-body">
 							<p class="post-summary">{{ post.summary }}</p>
 							<div class="post-categories">
-								{% for category in post.category_set.all %}
-									<a href="">{{ category }}</a>
+								{% for category in post.category_set.all|dictsort:"name" %}
+									<a>#{{ category }}</a>
 								{% endfor %}
 							</div>
 							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>
@@ -57,5 +60,33 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	/* Get categories checkbox list */
+	checkbox_list = document.getElementById("id_categories").querySelectorAll("input");
+
+	/* If checkbox is checked than color on */
+	checkbox_list.forEach(checkbox => {
+		if (checkbox.checked) {
+			checkbox.parentElement.style.color = '#d8433e';
+		}
+	})
+
+	/* Change checkbox color when user select it */
+	checkbox_list.forEach(checkbox => {
+		// console.log(checkbox)
+			checkbox.addEventListener('change', (event) =>{
+				if (event.currentTarget.checked) {
+					console.log(checkbox.id + ' checked');
+					console.log(checkbox.parentElement);
+					checkbox.parentElement.style.color = '#d8433e';
+				} else {
+					checkbox.parentElement.style.color = '#ffffff';
+					console.log('not checked');
+				}
+			})
+		}
+	)
+</script>
 
 {% endblock %}

@@ -63,6 +63,8 @@ def categories_page(request):
 						filtered_post = []
 						filtered_post = ps
 						first_filter_posts = ps
+					
+				categories_form = CategoriesForm(request.POST)
 
 				paginator = Paginator(filtered_post, 6)
 				page_number = request.GET.get('page')
@@ -70,13 +72,13 @@ def categories_page(request):
 			else:
 				redirect('blog:categories_page')
 
-	context = {'categories': categories, 'categories_form': categories_form, 'posts': page_obj}
+	context = {'categories_form': categories_form, 'posts': page_obj}
 	
 	return render(request, 'blog/categories.html', context)
 
 @login_required
 def dashboard(request):
-	posts = Post.objects.all()
+	posts = Post.objects.all().order_by('-date')
 
 	return render(request, 'blog/dashboard.html', {'posts': posts})
 
