@@ -13,7 +13,7 @@
 				<div class="post-content">
 					<div class="content-header">
 						<p class="post-date">{{ post.date|date:"Y-m-d" }}</p>		
-						<h2>{{ post.headline|title }}</h2>
+						<h1>{{ post.headline|title }}</h1>
 					</div>
 					<div class="content-body">
 						<p>{{ post.body|convert_markdown|safe }}</p>

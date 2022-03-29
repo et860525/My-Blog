@@ -23,7 +23,7 @@
 						<p>{{post.summary}}</p>
 						<div class="post-categories">
 							{% for category in post.category_set.all|dictsort:"name" %}
-								<a href="">#{{ category.name }}</a>
+								<a>#{{ category.name }}</a>
 							{% endfor %}
 						</div>
 					</div>
