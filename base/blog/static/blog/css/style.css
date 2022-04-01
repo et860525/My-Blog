@@ -125,13 +125,13 @@ body {
   color: #ffffff;
 }
 
-.post-categories a {
+.post-tags a {
   color: white;
   text-decoration: none;
   font-size: .886rem;
 }
 
-.post-categories a:hover {
+.post-tags a:hover {
   color: var(--hover-color);
 }
 
@@ -174,7 +174,7 @@ body {
   border-radius: 5px;
 }
 
-#id_categories {
+#id_tags {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   text-align: center;
@@ -182,12 +182,12 @@ body {
   padding: 0;
 }
 
-#id_categories label {
+#id_tags label {
   cursor: pointer;
   font-size: 1.2rem;
 }
 
-#id_categories input[type="checkbox"] {
+#id_tags input[type="checkbox"] {
   display: none;
 }
 
@@ -202,7 +202,7 @@ body {
     font-size: .9rem;
   }
 
-  #id_categories {
+  #id_tags {
     grid-template-columns: repeat(2, 1fr);
     text-align: left;
   }

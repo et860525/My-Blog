@@ -3,11 +3,18 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 
 # Create your models here.
+class Category(models.Model):
+	name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
+
 class Post(models.Model):
 	headline = models.CharField(max_length=50)
 	summary = models.CharField(max_length=150, null=True)
 	body = models.TextField()
 	date = models.DateTimeField(auto_now_add=True)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE, default='')
 	slug = models.SlugField(max_length=80, null=True)
 
 	def __str__(self):
@@ -30,7 +37,7 @@ class Post(models.Model):
 
 		return super().save(*args, **kwargs)
 
-class Category(models.Model):
+class Tag(models.Model):
 	name = models.CharField(max_length=100)
 	posts = models.ManyToManyField(Post)
 

@@ -18,9 +18,12 @@
 						</div>
 						<div class="content-body">
 							<p class="post-summary">{{ post.summary }}</p>
-							<div class="post-categories">
-								{% for category in post.category_set.all|dictsort:"name" %}
-									<a>#{{ category.name }}</a>
+							<div class="post-category">
+								Category: <a>{{ post.category }}</a>
+							</div>
+							<div class="post-tags">
+								{% for tag in post.tag_set.all|dictsort:"name" %}
+									<a>#{{ tag.name }}</a>
 								{% endfor %}
 							</div>
 							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>

@@ -10,8 +10,8 @@
 			<div class="category-filter">
 				<form method="post">
 					{% csrf_token %}
-					<h5>{{ categories_form.categories.label }}:</h5>
-					{{ categories_form.categories }}
+					<h5>{{ tag_form.tags.label }}:</h5>
+					{{ tag_form.tags }}
 					<div class="text-center">
 						<button class="btn btn-primary px-3" type="submit">Submit</button>
 					</div>
@@ -26,9 +26,9 @@
 						</div>
 						<div class="content-body">
 							<p class="post-summary">{{ post.summary }}</p>
-							<div class="post-categories">
-								{% for category in post.category_set.all|dictsort:"name" %}
-									<a>#{{ category }}</a>
+							<div class="post-tags">								
+								{% for tag in post.tag_set.all|dictsort:"name" %}
+									<a>#{{ tag.name }}</a>
 								{% endfor %}
 							</div>
 							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>
@@ -62,8 +62,8 @@
 </div>
 
 <script>
-	/* Get categories checkbox list */
-	checkbox_list = document.getElementById("id_categories").querySelectorAll("input");
+	/* Get tags checkbox list */
+	checkbox_list = document.getElementById("id_tags").querySelectorAll("input");
 
 	/* If checkbox is checked than color on */
 	checkbox_list.forEach(checkbox => {
