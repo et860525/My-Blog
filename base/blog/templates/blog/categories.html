@@ -8,16 +8,11 @@
 	<div class="container">
 		<div class="blog">
 			<div class="page">
-				<h1 class="mt-4" id="page-title">Post by Tags</h1>
-				<h6 class="tags-help">Click multiple tags to filter post...</h6>
-				<div class="tags-filter">
-					<form method="post">
-						{% csrf_token %}
-						{{ tag_form.tags }}
-						<div class="text-center">
-							<button class="btn btn-primary px-3" type="submit">Submit</button>
-						</div>
-					</form>
+				<h1 class="my-4" id="page-title">Post by Category</h1>
+				<div class="categories-filter">
+					{% for category in categories %}
+						<a href="">{{ category }}<span>{{ category.post_set.count }}</span></a>
+					{% endfor %}
 				</div>
 			</div>
 			{% for post in posts %}
@@ -63,33 +58,4 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	/* Get tags checkbox list */
-	checkbox_list = document.getElementById("id_tags").querySelectorAll("input");
-
-	/* If checkbox is checked than color on */
-	checkbox_list.forEach(checkbox => {
-		if (checkbox.checked) {
-			checkbox.parentElement.style.color = '#d8433e';
-		}
-	})
-
-	/* Change checkbox color when user select it */
-	checkbox_list.forEach(checkbox => {
-		// console.log(checkbox)
-			checkbox.addEventListener('change', (event) =>{
-				if (event.currentTarget.checked) {
-					console.log(checkbox.id + ' checked');
-					console.log(checkbox.parentElement);
-					checkbox.parentElement.style.color = '#d8433e';
-				} else {
-					checkbox.parentElement.style.color = '#ffffff';
-					console.log('not checked');
-				}
-			})
-		}
-	)
-</script>
-
 {% endblock %}

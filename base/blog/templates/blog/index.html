@@ -21,11 +21,6 @@
 							<div class="post-category">
 								Category: <a>{{ post.category }}</a>
 							</div>
-							<div class="post-tags">
-								{% for tag in post.tag_set.all|dictsort:"name" %}
-									<a>#{{ tag.name }}</a>
-								{% endfor %}
-							</div>
 							<a class="post-readmore" href="{{ post.get_absolute_url }}">Read More...</a>
 						</div>
 					</div>

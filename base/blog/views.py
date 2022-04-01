@@ -28,6 +28,18 @@ def post_page(request, slug):
 
 	return render(request, 'blog/post.html', {'post': post})
 
+def categories_page(request):
+	categories = Category.objects.all()
+	posts = Post.objects.all().order_by('-date')
+
+	paginator = Paginator(posts, 6)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+
+	context = {'posts': page_obj, 'categories': categories}
+	
+	return render(request, 'blog/categories.html', context)
+
 def tags_page(request):
 	tags = Tag.objects.all()
 	posts = Post.objects.all().order_by('-date')
@@ -79,8 +91,16 @@ def tags_page(request):
 @login_required
 def dashboard(request):
 	posts = Post.objects.all().order_by('-date')
+	categories = Category.objects.all().order_by('name')
+	tags = Tag.objects.all().order_by('name')
 
-	return render(request, 'blog/dashboard.html', {'posts': posts})
+	context = {
+		'posts': posts,
+		'categories': categories,
+		'tags': tags
+	}
+
+	return render(request, 'blog/dashboard.html', context)
 
 # Create Post
 @login_required
