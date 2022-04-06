@@ -7,6 +7,7 @@ urlpatterns = [
 	path('about/', views.about_page, name='about_page'),
 	path('dashboard/', views.dashboard, name='blog_dashboard_page'),
 	path('post/<slug:slug>/', views.post_page, name='post_detail_page'),
+	path('category-tag-control/', views.category_tag_control_page, name='category_tag_control_page'),
 	path('tags/', views.tags_page, name='tags_page'),
 	path('categories/', views.categories_page, name='categories_page'),
 	# Post create, delete, update

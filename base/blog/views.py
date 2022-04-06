@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from .models import Post, Category, Tag
-from .forms import CreatePost, UpdatePost, TagForm
+from .forms import CreatePost, UpdatePost, TagForm, CategoryTagControlForm
 
 # Create your views here.
 def home_page(request):
@@ -82,11 +82,49 @@ def tags_page(request):
 				page_number = request.GET.get('page')
 				page_obj = paginator.get_page(page_number)
 			else:
-				redirect('blog:tags_page')
+				return redirect('blog:tags_page')
 
 	context = {'tag_form': tag_form, 'posts': page_obj}
 	
 	return render(request, 'blog/tags.html', context)
+
+# Control Category and Tag
+@login_required
+def category_tag_control_page(request):
+	categories = Category.objects.all().order_by('name')
+	tags = Tag.objects.all().order_by('name')
+
+	categoryTagControlForm = CategoryTagControlForm()
+
+
+	if request.method == 'POST':
+		form = CategoryTagControlForm(request.POST)
+		
+		if form.is_valid():
+			save_type = form.cleaned_data['type']
+			name = form.cleaned_data['name']
+			
+			if save_type == 'Category':
+				if not Category.objects.filter(name=name).exists():
+					Category.objects.create(name=name)
+				else:
+					print('Category Exist')
+
+			if save_type == 'Tag':
+				if not Tag.objects.filter(name=name).exists():
+					Tag.objects.create(name=name)
+				else:
+					print('Tag Exist')
+		
+		return redirect('blog:category_tag_control_page')
+
+	context = {
+		'categories': categories,
+		'tags': tags,
+		'form': categoryTagControlForm,
+	}
+
+	return render(request, 'blog/category_tag_control.html', context)
 
 @login_required
 def dashboard(request):
@@ -97,7 +135,7 @@ def dashboard(request):
 	context = {
 		'posts': posts,
 		'categories': categories,
-		'tags': tags
+		'tags': tags,
 	}
 
 	return render(request, 'blog/dashboard.html', context)

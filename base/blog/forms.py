@@ -29,3 +29,12 @@ class TagForm(forms.Form):
 		required = False,
 		widget = forms.CheckboxSelectMultiple(),
 	)
+
+class CategoryTagControlForm(forms.Form):
+	TYPE = (
+        ('Category', 'Category'),
+        ('Tag', 'Tag'),
+	)
+	type = forms.ChoiceField(choices=TYPE, widget=forms.Select(attrs={'class': 'form-select mb-3'}))
+	name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control mb-3'}))
+	
