@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from .models import Post, Category, Tag
@@ -39,6 +39,13 @@ def categories_page(request):
 	context = {'posts': page_obj, 'categories': categories}
 	
 	return render(request, 'blog/categories.html', context)
+
+def category_posts_page(request, str):
+	
+	category = get_object_or_404(Category, name=str)
+	posts = Post.objects.filter(category=category)
+
+	return render(request, 'blog/category_posts.html', {'posts': posts, 'category': category})
 
 def tags_page(request):
 	tags = Tag.objects.all()
